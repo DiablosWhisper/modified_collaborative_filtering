@@ -1,5 +1,6 @@
 #region				-----External Imports-----
 from sklearn.metrics.pairwise import cosine_similarity
+from pandas import DataFrame
 from spacy import load
 #endregion
 
@@ -17,10 +18,10 @@ class Similarity(object):
         """
         return sentence(first).similarity(sentence(second))
     @staticmethod
-    def cosine(first: "Numpy", second: "Numpy")->"Float":
-        """Calculates similarity between two vectors
-            first: vector that has length 'n'
-            second: vector that has length 'n'
-        return value ranged between 0 and 1
+    def cosine(self, ratings: "Dataframe")->"Dataframe":
+        """Calculates cosine similarity between row
+            ratings: dataframe with objects ids 
+            on rows and user ids on columns
+        return matrix of pairwise similarities
         """
-        return cosine_similarity(first, second)
+        return DataFrame(cosine_similarity(ratings))
