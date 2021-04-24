@@ -1,4 +1,5 @@
 from sklearn.metrics.pairwise import cosine_similarity
+from collections import defaultdict
 from pandas import DataFrame
 from numpy import array
 
