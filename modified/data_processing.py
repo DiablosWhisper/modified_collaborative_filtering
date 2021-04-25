@@ -84,6 +84,11 @@ class UserProfileStory(object):
         return
 
     def __init__(self, user: "Dataframe")->"None":
+        """Creates user profile story
+            user: dataframe that contains objects ids
+            and time when the objects were seen last
+        return None
+        """
 
 class MovieCollection(object):
     def _process(self, movies: "Dataframe")->"List[Movie]":

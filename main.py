@@ -21,12 +21,14 @@ example={
 df=DataFrame(example, columns=["user_1", "user_2", "user_3",
 "user_4", "user_5", "user_6", "user_7", "user_8", "user_9",
 "user_10", "user_11", "user_12"])
-print("-----------Dataframe-----------")
 print(df, end="\n\n")
-print("-----------Pairwise-----------")
-sim_matrix=DataFrame(cosine_similarity(df))
-print(sim_matrix, end="\n\n")
+print(df["user_1"])
+# print("-----------Dataframe-----------")
+# print(df, end="\n\n")
+# print("-----------Pairwise-----------")
+# sim_matrix=DataFrame(cosine_similarity(df))
+# print(sim_matrix, end="\n\n")
 
-vec_1=array([[1, 0, 3, 0, 0, 5, 0, 0, 5, 0, 4, 0]])
-vec_2=array([[0, 0, 5, 4, 0, 0, 4, 0, 0, 2, 1, 3]])
-print(cosine_similarity(vec_1, vec_2))
+# vec_1=array([[1, 0, 3, 0, 0, 5, 0, 0, 5, 0, 4, 0]])
+# vec_2=array([[0, 0, 5, 4, 0, 0, 4, 0, 0, 2, 1, 3]])
+# print(cosine_similarity(vec_1, vec_2))
