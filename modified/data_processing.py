@@ -76,12 +76,23 @@ class MarkSimilarityMatrix(object):
         self._marks=self._process(marks)
 
 class UserProfileStory(object):
-    def _process(self, user: "Dataframe")->"Tuple[List[Movie]]":
+    def _process(self, user: "Dataframe")->"Tuple[List[Object]]":
         """Divides objects into seen and not seen groups
-            user: column with information aboutn objects
-        return two groups
+            user: column with information about objects
+        return divided groups
         """
-        return
+        last=user["timestamp"].max()
+        user["timestamp"]=user["timestamp"]\
+            .apply(lambda item: abs(item-last))
+        user=user.sort_values(by=["timestamp"])
+
+        return (user[user["rating"]!=0],
+        user[user["rating"]==0])
+    def get(self)->"Tuple[Dataframe]":
+        """Divides objects into two groups\n
+        return divided groups
+        """
+        return self._seen, self._not_seen
 
     def __init__(self, user: "Dataframe")->"None":
         """Creates user profile story
@@ -89,6 +100,7 @@ class UserProfileStory(object):
             and time when the objects were seen last
         return None
         """
+        self._seen, self._not_seen=self._process(user)
 
 class MovieCollection(object):
     def _process(self, movies: "Dataframe")->"List[Movie]":
