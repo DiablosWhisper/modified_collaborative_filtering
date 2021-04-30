@@ -62,9 +62,8 @@ class MarkSimilarityMatrix(object):
         """Calculates similarity matrix using marks\n
         return processed matrix of similarity
         """
-        return DataFrame(self._marks,
-        column=self._indeces,
-        index=self._indeces)
+        return DataFrame(index=self._indeces.
+        self._marks, column=self._indeces)
 
     def __init__(self, marks: "Dataframe")->"None":
         """Initializes matrix of marks similarity
@@ -76,7 +75,7 @@ class MarkSimilarityMatrix(object):
         self._marks=self._process(marks)
 
 class UserProfileStory(object):
-    def _process(self, user: "Dataframe")->"Tuple[List[Object]]":
+    def _process(self, user: "Dataframe")->"Tuple[Dataframe]":
         """Divides objects into seen and not seen groups
             user: column with information about objects
         return divided groups
@@ -87,7 +86,7 @@ class UserProfileStory(object):
         user=user.sort_values(by=["timestamp"])
 
         return (user[user["rating"]!=0],
-        user[user["rating"]==0])
+                user[user["rating"]==0])
     def get(self)->"Tuple[Dataframe]":
         """Divides objects into two groups\n
         return divided groups
