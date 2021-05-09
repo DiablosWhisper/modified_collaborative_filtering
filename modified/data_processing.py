@@ -6,6 +6,7 @@ from numpy import array
 
 #region				-----Internal Imports-----
 from similarity.similarity import Similarity
+from models.movie import Movie
 #endregion
 
 class MetaSimilarityMatrix(object):
@@ -14,10 +15,11 @@ class MetaSimilarityMatrix(object):
             objects: objects that contain meta attributes
         return processed matrix of similarity
         """
-        table=defaultdict(lambda: defaultdict(float))
+        table=defaultdict(dict)
         for first in range(0, len(objects)):
             for second in range(first, len(objects)):
-                table[first][second]=table[second][first]=\
+                table[objects[first].id][objects[second].id]=\
+                table[objects[second].id][objects[first].id]=\
                 self._compare(first=objects[first],
                 second=objects[second])
         return table
@@ -62,8 +64,9 @@ class MarkSimilarityMatrix(object):
         """Calculates similarity matrix using marks\n
         return processed matrix of similarity
         """
-        return DataFrame(index=self._indeces.
-        self._marks, column=self._indeces)
+        return DataFrame(self._marks,
+        columns=self._indeces,
+        index=self._indeces)
 
     def __init__(self, marks: "Dataframe")->"None":
         """Initializes matrix of marks similarity
@@ -102,8 +105,18 @@ class UserProfileStory(object):
         self._seen, self._not_seen=self._process(user)
 
 class MovieCollection(object):
-    def _process(self, movies: "Dataframe")->"List[Movie]":
-        pass
+    def get(self)->"List[Movie]":
+        """Transforms csv to Movie class collection\n
+        return transformed objects
+        """
+        return [Movie(*parameters) for parameters
+        in self._movies.itertuples(index=False)]
 
     def __init__(self, movies: "Dataframe")->"None":
-        pass
+        """Creates collection of Movie classes
+            movies: dataframe that contains all
+            necessary information about movies
+        return None
+        """
+        self._movies=movies[["id", "overview", 
+        "title"]].fillna("Empty string")

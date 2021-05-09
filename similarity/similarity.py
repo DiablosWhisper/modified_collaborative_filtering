@@ -1,21 +1,13 @@
 #region				-----External Imports-----
 from sklearn.metrics.pairwise import cosine_similarity
-from spacy import load
+import spacy
 #endregion
 
 #region				 -----Global Imports-----
-sentence=load("en_core_web_md")
+sentence=spacy.load("en_core_web_sm")
 #endregion
 
 class Similarity(object):
-    @staticmethod
-    def cosine(self, ratings: "Dataframe")->"Numpy[Numpy[Float]]":
-        """Calculates cosine similarity between row
-            ratings: dataframe with objects ids 
-            on rows and user ids on columns
-        return matrix of pairwise similarities
-        """
-        return cosine_similarity(ratings)
     @staticmethod
     def sentence(first: "String", second: "String")->"Float":
         """Calculates similarity between two sentences
@@ -25,3 +17,11 @@ class Similarity(object):
         """
         first, second=sentence(first), sentence(second)
         return first.similarity(second)
+    @staticmethod
+    def cosine(ratings: "Dataframe")->"Numpy[Numpy[Float]]":
+        """Calculates cosine similarity between row
+            ratings: dataframe with objects ids 
+            on rows and user ids on columns
+        return matrix of pairwise similarities
+        """
+        return cosine_similarity(ratings)
