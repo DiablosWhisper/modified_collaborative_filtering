@@ -3,4 +3,4 @@ class Movie(object):
     description: "String")->"None":
         self.description=description
         self.title=title
-        self.id=id
+        self.id=int(id)

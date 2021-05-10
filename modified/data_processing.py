@@ -118,5 +118,5 @@ class MovieCollection(object):
             necessary information about movies
         return None
         """
-        self._movies=movies[["id", "overview", 
+        self._movies=movies[["movieId", "overview",
         "title"]].fillna("Empty string")
