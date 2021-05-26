@@ -88,13 +88,12 @@ class UserProfileStory(object):
             .apply(lambda item: abs(item-last))
         user=user.sort_values(by=["timestamp"])
 
-        return (user[user["rating"]!=0],
-                user[user["rating"]==0])
+        return (user[user["rating"]!=0])
     def get(self)->"Tuple[Dataframe]":
         """Divides objects into two groups\n
         return divided groups
         """
-        return self._seen, self._not_seen
+        return self._seen
 
     def __init__(self, user: "Dataframe")->"None":
         """Creates user profile story
@@ -102,7 +101,7 @@ class UserProfileStory(object):
             and time when the objects were seen last
         return None
         """
-        self._seen, self._not_seen=self._process(user)
+        self._seen=self._process(user)
 
 class MovieCollection(object):
     def get(self)->"List[Movie]":
